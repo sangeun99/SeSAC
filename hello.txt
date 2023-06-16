@@ -1,5 +1,9 @@
 hello
 2023.06.16
-make conflict
 왔다 갑니다..
+<<<<<<< HEAD
 branch에 올리기
+=======
+make conflict
+또 왔다 갑니다..
+>>>>>>> ccc202a42ed71293da9a1d7a29f000a5f729fefb
