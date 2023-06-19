@@ -1,3 +1,4 @@
 *.pyc
 launch.json
 __pycache__
+.vscode
