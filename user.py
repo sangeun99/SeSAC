@@ -4,18 +4,16 @@ users = [
     {"name": "Charlie", "age": 35, "location": "Daegu", "car": "Audi"},
 ]
 
-def find_users(name) :
-    result = []
-    for user in users :
-        if user['name'] == name :
-            result.append(user) 
-            
-print(find_users('Alice'))
 
-def find_users_age(name, age) :
+search_user = {"name": "Bob", "age": 30}
+
+def find_users(search_user) :
     result = []
     for user in users :
-        if user['name'] == name and user['age'] == age :
-            result.append(user) 
+        for key in search_user.keys() :
+            if user[key] != search_user[key] :
+                break
+            result.append(user)
+    return result
             
-print(find_users_age('Alice', 25))
+print(find_users(search_user))
