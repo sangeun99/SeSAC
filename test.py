@@ -44,3 +44,12 @@ for num in numbers :
 
 print(even_numbers)
 print(odd_numbers)
+
+student_grades = {"John": 85, "Michael": 78, "Sophia": 95, "Vernon": 92}
+for name in student_grades :
+    if (student_grades[name] >= 90) :
+        print(name, student_grades[name])
+
+for name, grade in student_grades.items() :
+    if (grade >= 90):
+        print(name, grade)
