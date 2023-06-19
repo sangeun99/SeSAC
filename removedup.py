@@ -7,5 +7,9 @@ def remove_duplicate(numlist) :
             unique_list.append(n)
     return unique_list
 
+def remove_duplicate2(numlist) :
+    return list(set(numlist))
+
 print("원본리스트:", numbers)
 print("유닉리스트:", remove_duplicate(numbers))
+print("유닉리스트:", remove_duplicate2(numbers))
