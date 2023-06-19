@@ -1,5 +1,8 @@
-def get_name() :
-    return "John"
+# 튜플 (a, b)
+def get_name_and_age() :
+    return "John", 25
+
+name, age = get_name_and_age()
 
 if __name__ == "__main__" :
-    get_name()
+    print(name, age)
