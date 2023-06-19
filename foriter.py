@@ -24,3 +24,13 @@ print(squares)
 
 even_numbers = [x for x in range(1, 21) if x % 2 == 0]
 print(even_numbers)
+
+# 문자열을 각 글자를 순회하면서 대문자로 바꾸시오
+word = "hello"
+upper_letters = [letter.upper() for letter in word]
+print(upper_letters)
+
+# 문자열 길이가 3 이하인 단어들만 선택하기
+words = ['apple', 'banana', 'orange', 'grape', 'egg']
+short_words = [word for word in words if len(word) <= 3]
+print(short_words)
