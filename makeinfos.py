@@ -16,24 +16,33 @@ import random
 import calendar
 
 names = ['John', 'Jane', 'Michael', 'Emily', 'William', 'Olivia']
+genders = ['Female', 'Male']
 cities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Philadelphia']
 
 def generate_name():
     return random.choice(names)
 
-def generate_birthdata():
-    y = random.choice(range(1950, 2000))
-    m = random.choice(range(1, 13))
+def generate_birthdate():
+    y = random.randrange(1950, 2000)
+    m = random.randrange(1, 13)
     lastDayOfMonth = calendar.monthrange(y, m)[-1]
-    d = random.choice(range(1, lastDayOfMonth+1))
+    d = random.randrange(1, lastDayOfMonth+1)
     return '{year}-{month:02d}-{day:02d}'.format(year=y, month=m, day=d)
 
+def generate_gender():
+    return random.choice(genders)
+
+def generate_address():
+    return random.choice(cities)
+    
 data = []
 for _ in range(10):
     name = generate_name()
-    data.append(name)
+    birthdate = generate_birthdate()
+    gender = generate_gender()
+    address = generate_address()
+    info = [name, birthdate, gender, address]
+    data.append(info)
 
 for d in data:
     print(d)
-
-print(generate_birthdata())
