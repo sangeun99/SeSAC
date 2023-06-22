@@ -4,13 +4,7 @@ from generators.common.address import Address
 from generators.user.name import Name
 from generators.store.storename import StoreName
 
-# ----------------------------------------------------
-#   모델 불러오기
-# ----------------------------------------------------
-
-from models.user import User
-from models.store import Store
-from models.item import Item
+from models import generateMultipleUsers, generateMultipleStores, generateMultipleItems
 
 # ----------------------------------------------------
 #   각종 함수 - 데이터 불러오기 및 내보내기
@@ -39,51 +33,16 @@ def print_stdout(data):
         print(d)
 
 # ----------------------------------------------------
-#   각종 함수 - 데이터 생성 함수
-# ----------------------------------------------------
-
-def generateUser():
-    newUser1 = User()
-    return newUser1.generate()
-
-def generateMultipleUsers(num):
-    result = []
-    for _ in range(num) :
-        result.append(generateUser())
-    return(result)
-
-def generateStore():
-    newStore1 = Store()
-    return newStore1.generate()
-
-def generateMultipleStores(num):
-    result = []
-    for _ in range(num) :
-        result.append(generateStore())
-    return(result)
-
-def generateItem():
-    newItem1 = Item()
-    return newItem1.generate()
-
-def generateMultipleItems(num):
-    result = []
-    for _ in range(num) :
-        result.append(generateItem())
-    return(result)
-
-
-# ----------------------------------------------------
 #   메인 함수
 # ----------------------------------------------------
 
 if __name__=="__main__" :
 
-    print("----------test----------------")
-    for _ in range (3) :
-        newItem = Item()
-        print(newItem.generate())
-    print("--------------------------")
+    # print("----------test----------------")
+    # for _ in range (3) :
+    #     newItem = Item()
+    #     print(newItem.generate())
+    # print("--------------------------")
 
     load_files('src/firstname.txt', Name.firstnames)
     load_files('src/lastname.txt', Name.lastnames)
