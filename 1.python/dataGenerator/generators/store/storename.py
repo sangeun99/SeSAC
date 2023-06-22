@@ -1,6 +1,8 @@
 import random
- 
-class StoreName:
+
+from generators.generators import GeneratorBase
+
+class StoreName(GeneratorBase):
     
     types = []
     storelocations = []

@@ -1,6 +1,8 @@
 import random
 
-class Name:
+from generators.generators import GeneratorBase
+
+class Name(GeneratorBase):
     
     firstnames = []
     lastnames = []

@@ -1,6 +1,8 @@
 import random
 
-class Gender():
+from generators.generators import GeneratorBase
+
+class Gender(GeneratorBase):
     def __init__(self):
         self.gender = random.choice(['Female', 'Male'])
     

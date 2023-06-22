@@ -2,7 +2,9 @@ import calendar
 import random
 import datetime
 
-class Birthdate():
+from generators.generators import GeneratorBase
+
+class Birthdate(GeneratorBase):
     def __init__(self):
         self.year = random.randint(1960, 2010)
         self.month = random.randint(1, 12)

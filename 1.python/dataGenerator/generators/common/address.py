@@ -1,6 +1,8 @@
 import random
 
-class Address:
+from generators.generators import GeneratorBase
+
+class Address(GeneratorBase):
     cities = []
     gus = []
     streetforms = ['길', '로']

@@ -1,6 +1,8 @@
 import random
 
-class SingleItem:
+from generators.generators import GeneratorBase
+
+class SingleItem(GeneratorBase):
     itemTypes = {
              "Coffee": {
                 "Americano": 3000,
