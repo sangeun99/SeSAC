@@ -1,8 +1,3 @@
-
-# ----------------------------------------------------
-#   모델 불러오기
-# ----------------------------------------------------
-
 from models.user import User
 from models.store import Store
 from models.item import Item

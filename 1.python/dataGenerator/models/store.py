@@ -2,6 +2,9 @@ from generators.common.address import Address
 from generators.store.storename import StoreName
 
 class Store:
+
+    header = ('name', 'type', 'address')
+    
     def __init__(self) :
         newStoreName = StoreName()
         self.name = newStoreName.generate()

@@ -4,6 +4,9 @@ from generators.user.birthdate import Birthdate
 from generators.user.gender import Gender
 
 class User:
+
+    header = ('name', 'gender', 'age', 'birthdate', 'address')
+    
     def __init__(self) :
         self.name = Name().generate()
         self.gender = Gender().generate()
