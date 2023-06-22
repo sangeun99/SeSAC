@@ -2,4 +2,4 @@
 launch.json
 __pycache__
 .vscode
-csv
+*.csv
