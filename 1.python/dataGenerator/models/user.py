@@ -1,13 +1,12 @@
 from generators.common.address import Address
+from generators.common.id import Id
 from generators.user.name import Name
 from generators.user.birthdate import Birthdate
 from generators.user.gender import Gender
 
 class User:
-
-    header = ('name', 'gender', 'age', 'birthdate', 'address')
-    
     def __init__(self) :
+        self.id = Id().generate()
         self.name = Name().generate()
         self.gender = Gender().generate()
         newBirthdate = Birthdate()
@@ -16,4 +15,12 @@ class User:
         self.address = Address().generate()
 
     def generate(self):
-        return self.name, self.gender, self.age, self.birthdate, self.address
+        generatedData = {
+            "id" : self.id, 
+            "name" : self.name, 
+            "gender" : self.gender, 
+            'age' : self.age, 
+            "birthdate" : self.birthdate, 
+            'address' : self.address
+        }
+        return generatedData
