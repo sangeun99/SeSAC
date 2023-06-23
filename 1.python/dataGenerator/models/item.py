@@ -2,7 +2,7 @@ from generators.common.id import Id
 from generators.item.singleitem import SingleItem
 
 class Item:
-    def __init__(self, i) :
+    def __init__(self) :
         self.itemId = Id().generate()
         newItem = SingleItem()
         self.itemName = newItem.generate()

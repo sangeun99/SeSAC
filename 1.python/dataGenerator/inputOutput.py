@@ -30,11 +30,11 @@ def printStdout(data) :
 def writeCSV(filename, data) :
     f = open(filename, 'w', newline='', encoding='UTF8')
     dataWriter = csv.writer(f)
+    createdTime = [datetime.datetime.now()]
+    dataWriter.writerow(createdTime)
     dataWriter.writerow(data[0].keys())
     for d in data:
         dataWriter.writerow(d.values())
-    createdTime = [datetime.datetime.now()]
-    dataWriter.writerow(createdTime)
     f.close()
 
 def printOps(filename, data, output) :
