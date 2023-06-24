@@ -36,6 +36,7 @@ def writeCSV(filename, data) :
     for d in data:
         dataWriter.writerow(d.values())
     f.close()
+    print("작업이 완료되었습니다.")
 
 def printOps(filename, data, output) :
     if output == 'stdout' :
