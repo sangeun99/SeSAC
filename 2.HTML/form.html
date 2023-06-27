@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>입력폼</title>
+</head>
+
+<body>
+  <h1>입력폼들 만들어보기</h1>
+  <label for="name">아이디</label>
+  <input id="name" type="text" placeholder="아이디를 입력하세요" size="20" maxlength="20"/><br/>
+  <label for="password">비밀번호</label>
+  <input id="password" type="password" placeholder="비밀번호를 입력하세요" size="20" maxlength="20"/><br/>
+  <label for="otp">OTP</label>
+  <input id="otp" type="number" placeholder="OTP를 입력하세요" size="20" maxlength="20"/><br/>
+  <label for="opinions">의견</label>
+  <textarea id="opinions" cols="30" rows="10"></textarea>
+
+  <h1>다양한 버튼 만들어보기</h1>
+  <label>버튼1</label>
+  <input type="button" value="입력">
+  <input type="button" value="push">
+  <input type="button" value="button"><br/>
+  <p>과목고르기</p>
+  <input type="radio" name="subject">국어
+  <input type="radio" name="subject">영어
+  <input type="radio" name="subject">수학
+  <br/>
+  <p>과일고르기</p>
+  <input type="radio" name="fruit">딸기
+  <input type="radio" name="fruit">복숭아
+  <input type="radio" name="fruit">수박
+  <br />
+  <p>멀티초이스 만들기</p>
+  <input type="checkbox" name="food">돈까스
+  <input type="checkbox" name="food">김밥
+  <input type="checkbox" name="food">떡볶이
+  <input type="checkbox" name="food">라면
+  <br />
+  <p>풀다운 메뉴 만들어보기</p>
+  <select size="3" multiple>
+    <option>콜라</option>
+    <option>사이다</option>
+    <option>환타</option>
+  </select>
+  <h1>
+    프로그레스바
+  </h1>
+  <p>로딩 중 . . .</p>
+  <progress value="60" max="100"></progress>
+</body>
+
+</html>
