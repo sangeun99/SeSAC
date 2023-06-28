@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hello</title>
+</head>
+
+<body>
+  <h1>hello</h1>
+  {% for user in username %}
+    {% if user == 'admin' %}
+      <h3>안녕하세요, 관리자님</h3>
+    {% else %}
+      <p>{{user}}님 안녕하세요</p>
+    {% endif %}
+  {% endfor %}
+  <p>from index.html file!</p>
+</body>
+</html>
