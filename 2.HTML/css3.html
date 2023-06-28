@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <title>Document</title>
+  <style>
+    div {
+      /* display: inline-block; */
+      width: 100px;
+      height: 100px;
+      margin: 5px;
+      border: 5px solid orangered;
+      background-color: orange;
+      color: white;
+      font-weight: 400;
+    }
+
+    .rel {
+      background-color: darkblue;
+      position: relative;
+      top: 50px;
+      left: 50px;
+    }
+
+    .abs {
+      position: absolute;
+      top: 50px;
+      left: 200px;
+    }
+
+    .container {
+      width: 300px;
+      height: 180px;
+      background-image: url(images/cat1.jpg);
+      background-size: 100% 100%;
+    }
+
+    p.inline {
+      position: relative;
+      top: 30px;
+      left: 50px;
+      font-weight: 900;
+    }
+  </style>
+</head>
+<body>
+  <div>1</div>
+  <div class="rel">2</div>
+  <div class="abs">3</div>
+  <div>4</div>
+  <div class="container">
+    <p class="inline">
+      귀여운 고양이
+    </p>
+  </div>
+</body>
+</html>

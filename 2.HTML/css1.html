@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <title>마이타이틀</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+    
+    .rgb-black { color: rgb(0, 0, 0) }
+    .rgb-red { color: rgb(255, 0, 0) }
+    .rgba-black { color: rgba(0, 0, 0, 0.5) }
+    .rgba-red { color: rgba(255, 0, 0, 0.5) }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    #myid1 {
+      color: yellow
+    }
+
+    h3,
+    h4 {
+      text-align: center;
+      text-decoration: underline;
+      border: 5px groove yellow;
+      color: white;
+      padding: 100px;
+      margin: 40px;
+      background-image: url(images/cat1.jpg);
+      background-repeat: no-repeat;
+    }
+
+    p {
+      width: 40%;
+      background-color: pink;
+      border-style: solid;
+      border-color: black;
+      border-width: 4px;
+      font-style: italic;
+    }
+
+    p.myclass1 {
+      color: blue;
+      font-weight: 900;
+    }
+
+    p {
+      color: red;
+      text-align: center;
+    }
+
+    p:first-child {
+      color: black
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+  </style>
+</head>
+
+<body>
+  <h1>CSS 연습용 페이지</h1>
+  <h3>h3 헤딩입니다</h3>
+  <h3 class="rgba-black">h4 헤딩입니다</h3>
+  <div>
+    <p>여기는 문장을 아무거나 작성하시오.</p>
+    <p class="myclass1 rgba-red">여기는 문장을 아무거나 작성하시오.</p>
+    <p id="myid1">여기는 문장을 아무거나 작성하시오.</p>
+    <p class="myclass1">여기는 문장을 아무거나 작성하시오.</p>
+    <p>여기는 문장을 아무거나 작성하시오.</p>
+  </div>
+
+  <ul>
+    <li class="rgba-red">아메리카노</li>
+    <li>카페라떼</li>
+    <li class="rgba-red">아이스티</li>
+    <li>자몽에이드</li>
+  </ul>
+</body>
+
+</html>

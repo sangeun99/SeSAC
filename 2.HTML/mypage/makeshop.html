@@ -3,81 +3,101 @@
 
 <head>
   <title>메이크샵</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap');
+  </style>
+
+  <link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
   <header>
     <div class="logo">
-      <a href="">makeshop</a>
+      <a href="">
+        <img src="logo.png" alt="makeshop">
+      </a>
     </div>
-    <nav class="menu">
-      <ul>
-        <div class="menu-left">
-          <li>알아보기</li>
-          <li>준비하기</li>
-          <li>판매하기</li>
-          <li>운영하기</li>
-          <li>홍보하기</li>
-        </div>
-        <div class="menu-right">
-          <li>메이크샵스토어</li>
-          <li>고객센터</li>
-        </div>
+    <nav>
+      <ul class="menu">
+        <li class="part1">알아보기</li>
+        <li class="part1">준비하기</li>
+        <li class="part1">판매하기</li>
+        <li class="part1">운영하기</li>
+        <li class="part1">홍보하기</li>
+        <li class="part2">메이크샵스토어</li>
+        <li class="part2">고객센터</li>
       </ul>
     </nav>
-    <div class="join">
-      <a href="">로그인/회원가입</a>
-      <div class="search">
-
-        <a href="">검색</a>
-      </div>
+    <div class="header-right">
+      <a href="#">
+        <button class="join">
+          로그인/회원가입
+        </button>
+      </a>
+      <a class="searcharea" href="#">
+        <p class="hidden">검색</p>
+        <img class="search" src="search.png" alt="">
+      </a>
     </div>
   </header>
   <section class="main">
     <div class="main-title">
-      <h2>
-        나만의 메이크샵
-      </h2>
-      <p>
-        쇼핑몰 준비부터 판매, 홍보까지 모든 것을 함께 합니다.
-      </p>
-      <a href="">START NOW</a>
-      <img src="../images/cat1.jpg" alt="">
+      <div class="main-title-text">
+        <h2>
+          나만의<br/>메이크샵
+        </h2>
+        <p>
+          쇼핑몰 준비부터 판매, 홍보까지 모든 것을 함께 합니다.
+        </p>
+        <a href="#">
+          <button class="start-now">
+            START NOW
+          </button>
+        </a>
+      </div>
+      <img src="main_visual_mobile.png" alt="">
     </div>
     <div class="main-service">
+      <h3>내게 맞는 서비스</h3>
+      <p>메이크샵이 제공하는 맞춤 서비스를 한 눈에 확인해보세요.</p>
       <ul>
-        <li>
-          <a href="">
-            <img src="" alt="">
+        <li class="options">
+          <a href="#">
+            <img src="../images/cat2.jpg" alt="">
             <span class="service-title">1인/소규모</span>
             <span class="service-text">쇼핑몰 창업을 시작하려고 한다면 무료로 쇼핑몰을 이용해보세요.</span>
           </a>
         </li>
-        <li>
+        <li class="options">
           <a href="">
             <img src="" alt="">
             <span class="service-title">쇼핑몰 제작 의뢰</span>
             <span class="service-text">초기 쇼핑몰 구축 및 교육 지원이 필요하다면 지원 서비스를 통해 쉽고 빠르게 구축해보세요</span>
           </a>
-        </li><li>
+        </li>
+        <li class="options">
           <a href="">
             <img src="" alt="">
             <span class="service-title">기업 맞춤 제작</span>
             <span class="service-text">기업 맞춤형 쇼핑몰 구축이 필요하다면 기업 특성에 맞춰 시스템 개발이 가능해요</span>
           </a>
-        </li><li>
+        </li>
+        <li class="options">
           <a href="">
             <img src="" alt="">
             <span class="service-title">브랜드 기업</span>
             <span class="service-text">브랜드, 기업의 이커머스 진출을 원하신다면 메이크샵을 통해 쇼핑몰을 시작해보세요</span>
           </a>
-        </li><li>
+        </li>
+        <li class="options">
           <a href="">
             <img src="" alt="">
             <span class="service-title">쇼핑몰 이전</span>
             <span class="service-text">기존 쇼핑몰이 있는데 메이크샵을 이용하고 싶으시다면 데이터와 디자인을 완벽하게 이전해드려요.</span>
           </a>
-        </li><li>
+        </li>
+        <li class="options">
           <a href="">
             <img src="" alt="">
             <span class="service-title">광고 센터</span>
@@ -166,7 +186,7 @@
       </table>
     </div>
     <div class="cs-info">
-      <img src="" alt="We Make, SHOP"/>
+      <img src="" alt="We Make, SHOP" />
       <span>메이크샵에 대해 궁금하신 사항이 있으신가요?</span>
       <span>CS Center</span>
       <span>02-2026-2300</span>
