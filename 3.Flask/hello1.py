@@ -4,14 +4,14 @@ import csv
 app = Flask(__name__)
 
 @app.route('/')
-@app.route('/<name>')
-def home(name=""):
-    user_names = []
-    with open('names.csv', newline='') as csvfile:
+def home():
+    users = []
+    with open('user.csv', newline='', encoding="utf-8") as csvfile:
         reader = csv.reader(csvfile)
+        next(reader)
         for row in reader:
-            user_names.append(row)
-    return render_template("index.html", username=user_names)
+            users.append(row)
+    return render_template("index.html", usernames=users)
 
 if __name__ =="__main__" :
     app.run(debug=True) # 5000번이 기본값
