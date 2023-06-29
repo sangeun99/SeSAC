@@ -11,7 +11,7 @@ def root() :
 def user():
     users = []
     with open('src/user.csv', newline='', encoding="utf-8") as user:
-        reader = csv.reader(user)
+        reader = csv.DictReader(user)
         next(reader)
         for user in reader:
             users.append(user)
@@ -36,7 +36,7 @@ def user_detail(userid):
 def store():
     stores = []
     with open('src/store.csv', newline='', encoding="utf-8") as store:
-        reader = csv.reader(store)
+        reader = csv.DictReader(store)
         next(reader)
         for store in reader:
             stores.append(store)

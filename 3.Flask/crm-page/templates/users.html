@@ -40,12 +40,12 @@
       </tr>
       {% for user in users %}
       <tr class="info-row">
-        {% for i in range(user | length) %}
+        {% for key in user.keys() %}
         <td class="info-single-item">
-          {% if i == 0 %}
-          <a class="id-link" href="/user_detail/{{user[i]}}">{{user[i]}}</a>
+          {% if key == 'Id' %}
+          <a class="id-link" href="/user_detail/{{user[key]}}">{{user[key]}}</a>
           {% else %}
-          {{user[i]}}
+          {{user[key]}}
           {% endif %}
         </td>
         {% endfor %}
@@ -54,5 +54,4 @@
     </table>
   </div>
 </body>
-
 </html>

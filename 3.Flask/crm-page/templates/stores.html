@@ -38,20 +38,18 @@
       </tr>
       {% for store in stores %}
       <tr class="info-row">
-        {% for i in range(store | length) %}
+        {% for key in store.keys() %}
         <td class="info-single-item">
-          {% if i == 0 %}
-          <a class="id-link" href="/store_detail/{{store[i]}}">{{store[i]}}</a>
+          {% if key == 'Id' %}
+          <a class="id-link" href="/store_detail/{{store[key]}}">{{ store[key] }}</a>
           {% else %}
-          {{store[i]}}
+          {{ store[key] }}
           {% endif %}
         </td>
         {% endfor %}
       </tr>
       {% endfor %}
     </table>
-
   </div>
 </body>
-
 </html>
