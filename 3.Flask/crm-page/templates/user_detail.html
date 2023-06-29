@@ -31,17 +31,16 @@
     </nav>
     <table class="info-table">
       <tr class="info-row">
-        <th class="info-type">Id</th>
-        <th class="info-type">Name</th>
-        <th class="info-type">Gender</th>
-        <th class="info-type">Age</th>
-        <th class="info-type">Birthdate</th>
-        <th class="info-type">Address</th>
+        {% for key in userinfo.keys() %}
+        <th class="info-type">
+          {{ key }}
+        </th>
+        {% endfor %}
       </tr>
       <tr class="info-row no-background">
-        {% for item in userinfo.values() %}
+        {% for value in userinfo.values() %}
         <td class="info-single-item">
-          {{item}}
+          {{ value }}
         </td>
         {% endfor %}
       </tr>

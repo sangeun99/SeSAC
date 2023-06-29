@@ -31,10 +31,11 @@
     </nav>
     <table class="info-table">
       <tr class="info-row">
-        <th class="info-type">Id</th>
-        <th class="info-type">Type</th>
-        <th class="info-type">Name</th>
-        <th class="info-type">Address</th>
+        {% for key in stores[0].keys() %}
+        <th class="info-type">
+          {{ key }}
+        </th>
+        {% endfor %}
       </tr>
       {% for store in stores %}
       <tr class="info-row">

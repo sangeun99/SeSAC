@@ -155,3 +155,27 @@ body {
   color: var(--blue-dark);
   text-decoration: underline;
 }
+
+.paging-bar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.paging {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px var(--border) solid;
+}
+
+.current .paging {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.paging:hover {
+  background-color: var(--blue-light);
+}

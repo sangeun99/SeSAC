@@ -6,6 +6,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>USERS - CRM</title>
   <link href='{{url_for("static", filename="style.css")}}' rel="stylesheet">
+  <style>
+    .pagination {
+      padding: 30px 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .paging-bar {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .paging {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border: 1px var(--border) solid;
+    }
+
+    .current.paging {
+      background-color: var(--blue);
+      color: var(--white);
+    }
+
+    .paging:not(.current):hover {
+      background-color: var(--blue-light);
+    }
+  </style>
 </head>
 
 <body>
@@ -31,12 +63,11 @@
     </nav>
     <table class="info-table">
       <tr class="info-row">
-        <th class="info-type">Id</th>
-        <th class="info-type">Name</th>
-        <th class="info-type">Gender</th>
-        <th class="info-type">Age</th>
-        <th class="info-type">Birthdate</th>
-        <th class="info-type">Address</th>
+        {% for key in users[0].keys() %}
+        <th class="info-type">
+          {{ key }}
+        </th>
+        {% endfor %}
       </tr>
       {% for user in users %}
       <tr class="info-row">
@@ -52,6 +83,36 @@
       </tr>
       {% endfor %}
     </table>
+    <div class="pagination">
+      <ul class="paging-bar">
+        {% if index > 10 %}
+        <li>
+          <a class="prev-prev paging" href="/users/{{index-10}}">&lt;&lt;</a>
+        </li>
+        {% endif %}
+        {% if index > 1 %}
+        <li>
+          <a class="prev paging" href="/users/{{index-1}}">&lt;</a>
+        </li>
+        {% endif %}
+        {% for i in range(((index-1)//10)*10+1, [((index-1)//10)*10+11, total_pages+1]|min ) %}
+        <li>
+          <a class="paging {% if i == index %} current {% endif %}" href="/users/{{i}}">{{ i }}</a>
+        </li>
+        {% endfor %}
+        {% if total_pages > index %}
+        <li>
+          <a class="next paging" href="/users/{{index+1}}">&gt;</a>
+        </li>
+        {% endif %}
+        {% if total_pages >= index+10 %}
+        <li>
+          <a class="next-next paging" href="/users/{{index+10}}">&gt;&gt;</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
   </div>
 </body>
+
 </html>
