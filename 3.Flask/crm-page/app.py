@@ -10,25 +10,25 @@ def root() :
 @app.route("/users")
 def user():
     users = []
-    with open('src/user.csv', newline='', encoding="utf-8") as user:
+    with open('src/data_space.csv', newline='', encoding="utf-8") as user:
         reader = csv.DictReader(user)
         next(reader)
-        for user in reader:
-            users.append(user)
+        for row in reader:
+            clean_row = {key.strip(): value.strip() for key, value in row.items()}
+            users.append(clean_row)
     return render_template("users.html", users=users)
 
 
 @app.route("/user_detail/<userid>")
 def user_detail(userid):
     users = []
-    with open('src/user.csv', newline='', encoding="utf-8") as user:
-        reader = csv.reader(user)
+    with open('src/data_space.csv', newline='', encoding="utf-8") as user:
+        reader = csv.DictReader(user)
         next(reader)
-        for user in reader:
-            users.append(user)
-    for user in users:
-        if user[0] == userid:
-            userinfo = user
+        for row in reader:
+            clean_row = {key.strip(): value.strip() for key, value in row.items()}
+            if clean_row['Id'] == userid :
+                userinfo = clean_row
     return render_template("user_detail.html", userinfo=userinfo)
 
 
@@ -38,18 +38,20 @@ def store():
     with open('src/store.csv', newline='', encoding="utf-8") as store:
         reader = csv.DictReader(store)
         next(reader)
-        for store in reader:
-            stores.append(store)
+        for row in reader:
+            clean_row = {key.strip(): value.strip() for key, value in row.items()}
+            stores.append(clean_row)
     return render_template("stores.html", stores=stores)
 
 @app.route("/store_detail/<storeid>")
 def store_detail(storeid):
     with open('src/store.csv', newline='', encoding="utf-8") as store:
-        reader = csv.reader(store)
+        reader = csv.DictReader(store)
         next(reader)
-        for store in reader:
-            if store[0] == storeid :
-                storeinfo = store
+        for row in reader:
+            clean_row = {key.strip(): value.strip() for key, value in row.items()}
+            if clean_row['Id'] == storeid :
+                storeinfo = clean_row
     return render_template("store_detail.html", storeinfo=storeinfo)
 
 

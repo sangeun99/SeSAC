@@ -29,7 +29,7 @@
         </li>
       </ul>
     </nav>
-    <table>
+    <table class="info-table">
       <tr class="info-row">
         <th class="info-type">Id</th>
         <th class="info-type">Name</th>
@@ -39,7 +39,7 @@
         <th class="info-type">Address</th>
       </tr>
       <tr class="info-row no-background">
-        {% for item in userinfo %}
+        {% for item in userinfo.values() %}
         <td class="info-single-item">
           {{item}}
         </td>

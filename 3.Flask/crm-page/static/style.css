@@ -99,6 +99,10 @@ body {
   align-items: center;
 }
 
+.main-container {
+  width: 60%;
+}
+
 .menu {
   display: flex;
   background-color: var(--primary);
@@ -115,6 +119,11 @@ body {
 
 .menu-list:hover {
   opacity: 50%;
+}
+
+.info-table {
+  width: 100%;
+  padding: auto;
 }
 
 .info-row {

@@ -29,15 +29,16 @@
         </li>
       </ul>
     </nav>
-    <table>
+    <table class="info-table">
       <tr class="info-row">
-        <th class="info-type">Id</th>
-        <th class="info-type">Type</th>
-        <th class="info-type">Name</th>
-        <th class="info-type">Address</th>
+        {% for key in storeinfo.keys() %}
+        <th class="info-type">
+          {{ key }}
+        </th>
+        {% endfor %}
       </tr>
       <tr class="info-row">
-        {% for item in storeinfo %}
+        {% for value in storeinfo.values() %}
         <td class="info-single-item">
           {{ item }}
         </td>
