@@ -80,13 +80,13 @@
           <td class="info-single-item">
             {% if key == 'Name' and search_name %}
             <a class="id-link" href="/user_detail/{{users[i]['Id']}}">{{users[i][key]}}</a>
-            {% for c in range(users[i]['Name']|length) %}
-            {% if highlighted[i][c] == 1 %}
-              <p class="highlighted">{{users[i]['Name'][c]}}</p>
-              {% else %}
-              <p>{{users[i]['Name'][c]}}</p>
-            {% endif %}
-            {% endfor %}
+            {% for c in range(users[i]['Name']|length) %}<!-- 
+            -->{% if highlighted[i][c] == 1 %}<!-- 
+            --><span class="highlighted">{{users[i]['Name'][c]}}</span><!-- 
+            -->{% else %}<!-- 
+            --><span>{{users[i]['Name'][c]}}</span><!-- 
+            -->{% endif %}<!-- 
+             -->{% endfor %}
             {% else %}
             {{users[i][key]}}
             {% endif %}
@@ -103,7 +103,8 @@
       <ul class="paging-bar">
         {% if page > 10 %}
         <li>
-          <a class="prev-prev paging" href="/users/?page={{page-10}}&name={{search_name}}&gender={{search_gender}}">&lt;&lt;</a>
+          <a class="prev-prev paging"
+            href="/users/?page={{page-10}}&name={{search_name}}&gender={{search_gender}}">&lt;&lt;</a>
         </li>
         {% endif %}
         {% if page > 1 %}
@@ -113,7 +114,8 @@
         {% endif %}
         {% for i in range(((page-1)//10)*10+1, [((page-1)//10)*10+11, total_pages+1]|min ) %}
         <li>
-          <a class="paging {% if i == page %} current {% endif %}" href="/users/?page={{i}}&name={{search_name}}&gender={{search_gender}}">{{ i }}</a>
+          <a class="paging {% if i == page %} current {% endif %}"
+            href="/users/?page={{i}}&name={{search_name}}&gender={{search_gender}}">{{ i }}</a>
         </li>
         {% endfor %}
         {% if total_pages > page %}
@@ -123,7 +125,8 @@
         {% endif %}
         {% if total_pages >= page+10 %}
         <li>
-          <a class="next-next paging" href="/users/?page={{page+10}}&name={{search_name}}&gender={{search_gender}}">&gt;&gt;</a>
+          <a class="next-next paging"
+            href="/users/?page={{page+10}}&name={{search_name}}&gender={{search_gender}}">&gt;&gt;</a>
         </li>
         {% endif %}
       </ul>
