@@ -7,35 +7,12 @@
   <title>USERS - CRM</title>
   <link href='{{url_for("static", filename="style.css")}}' rel="stylesheet">
   <style>
-    .pagination {
-      padding: 30px 0px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .highlighted {
+      color: red;
     }
 
-    .paging-bar {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-
-    .paging {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 40px;
-      height: 40px;
-      border: 1px var(--border) solid;
-    }
-
-    .current.paging {
-      background-color: var(--blue);
-      color: var(--white);
-    }
-
-    .paging:not(.current):hover {
-      background-color: var(--blue-light);
+    span {
+      padding: 0;
     }
   </style>
 </head>
@@ -61,53 +38,125 @@
         </li>
       </ul>
     </nav>
+    <div class="search">
+      <form class="search-form" action="/users/" method="GET">
+        <div>
+          <label for="name">Name :</label>
+          <input name="name" class="input-form" type="text" size="5" />
+        </div>
+        <div>
+          <label for="gender">Gender :</label>
+          <select name="gender" class="input-form">
+            <option value=""></option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+          </select>
+        </div>
+        <button type="submit">검색</button>
+      </form>
+    </div>
+    {% if users %}
     <table class="info-table">
-      <tr class="info-row">
-        {% for key in users[0].keys() %}
-        <th class="info-type">
-          {{ key }}
-        </th>
-        {% endfor %}
-      </tr>
-      {% for user in users %}
-      <tr class="info-row">
-        {% for key in user.keys() %}
-        <td class="info-single-item">
-          {% if key == 'Id' %}
-          <a class="id-link" href="/user_detail/{{user[key]}}">{{user[key]}}</a>
-          {% else %}
-          {{user[key]}}
+      <thead>
+        <tr class="info-row">
+          {% for key in users[0].keys() %}
+          {% if key != 'Id' %}
+          <th class="info-type">
+            {{ key }}
+          </th>
           {% endif %}
-        </td>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr class="info-row">
+          {% for key in user.keys() %}
+          {% if key != 'Id' %}
+          <td class="info-single-item">
+            {% if key == 'Name' and search_name %}
+            <a class="id-link" href="/user_detail/{{user['Id']}}">{{user[key]}}</a>
+
+
+
+            {% for i in range(user['Name']|length - search_name|length + 1) %}
+            {% if user['Name'][i:i+search_name|length] == search_name %}
+            <span class="highlighted">
+
+              {% endif %}
+
+              {{user['Name'][i:i+search_name|length]}}
+              
+              {% if user['Name'][i:i+search_name|length] == search_name %}
+              {% set i = i + search_name|length %}
+            </span>
+            {% endif %}
+            {% endfor %}
+
+
+
+
+            {% else %}
+            {{user[key]}}
+            {% endif %}
+          </td>
+          {% endif %}
+          {% endfor %}
+        </tr>
+
         {% endfor %}
-      </tr>
-      {% endfor %}
+
+
+
+        {% for i in range(users|length) %}
+        <tr class="info-row">
+          {% for key in users[i].keys() %}
+          {% if key != 'Id' %}
+          <td class="info-single-item">
+            {% if key == 'Name' and search_name %}
+            <a class="id-link" href="/user_detail/{{users[i]['Id']}}">{{users[i][key]}}</a>
+            {% for c in range(users[i]['Name']|length) %}
+            {% if highlighted[i][c] == 1 %}
+              <span class="highlighted">{{users[i]['Name'][c]}}</span>
+              {% else %}
+            {{users[i]['Name'][c]}}
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+          {% endif %}
+          {% endfor %}
+        </tr>
+
+        {% endfor %}
+      </tbody>
+
     </table>
+    {% endif %}
     <div class="pagination">
       <ul class="paging-bar">
-        {% if index > 10 %}
+        {% if page > 10 %}
         <li>
-          <a class="prev-prev paging" href="/users/{{index-10}}">&lt;&lt;</a>
+          <a class="prev-prev paging" href="/users/?page={{page-10}}&name={{search_name}}&gender={{search_gender}}">&lt;&lt;</a>
         </li>
         {% endif %}
-        {% if index > 1 %}
+        {% if page > 1 %}
         <li>
-          <a class="prev paging" href="/users/{{index-1}}">&lt;</a>
+          <a class="prev paging" href="/users/?page={{page-1}}&name={{search_name}}&gender={{search_gender}}">&lt;</a>
         </li>
         {% endif %}
-        {% for i in range(((index-1)//10)*10+1, [((index-1)//10)*10+11, total_pages+1]|min ) %}
+        {% for i in range(((page-1)//10)*10+1, [((page-1)//10)*10+11, total_pages+1]|min ) %}
         <li>
-          <a class="paging {% if i == index %} current {% endif %}" href="/users/{{i}}">{{ i }}</a>
+          <a class="paging {% if i == page %} current {% endif %}" href="/users/?page={{i}}&name={{search_name}}&gender={{search_gender}}">{{ i }}</a>
         </li>
         {% endfor %}
-        {% if total_pages > index %}
+        {% if total_pages > page %}
         <li>
-          <a class="next paging" href="/users/{{index+1}}">&gt;</a>
+          <a class="next paging" href="/users/?page={{page+1}}&name={{search_name}}&gender={{search_gender}}">&gt;</a>
         </li>
         {% endif %}
-        {% if total_pages >= index+10 %}
+        {% if total_pages >= page+10 %}
         <li>
-          <a class="next-next paging" href="/users/{{index+10}}">&gt;&gt;</a>
+          <a class="next-next paging" href="/users/?page={{page+10}}&name={{search_name}}&gender={{search_gender}}">&gt;&gt;</a>
         </li>
         {% endif %}
       </ul>
