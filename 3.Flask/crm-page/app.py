@@ -10,16 +10,22 @@ def get_data(filename, search_name="", search_gender=""):
         reader = csv.DictReader(user, skipinitialspace=True)
         next(reader)
         for row in reader:
+            # print(match, highlighted)
             if (is_name_match(search_name, row['Name']) and
                 is_gender_match(search_gender, row['Gender'])) :
+
                 data.append(row)
                 match = [0 for _ in range(len(row['Name']))]
+
                 if (search_name) :
-                    
-                    for i in range(len(search_name)-len(search_name)+1):
+                    for i in range(len(row['Name'])-len(search_name)+1):
                         if row['Name'][i:i+len(search_name)] == search_name:
                             match[i:i+len(search_name)] = [1 for _ in range(i, i+len(search_name))]
-        return data, match
+            
+                highlighted.append(list(match))
+            # print(match, highlighted)
+
+    return data, highlighted
 
 def is_name_match(search_name, data_name):
     if (search_name in data_name) :

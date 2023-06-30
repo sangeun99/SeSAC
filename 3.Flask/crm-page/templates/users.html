@@ -14,6 +14,10 @@
     span {
       padding: 0;
     }
+
+    p {
+      display: inline;
+    }
   </style>
 </head>
 
@@ -69,45 +73,6 @@
         </tr>
       </thead>
       <tbody>
-        {% for user in users %}
-        <tr class="info-row">
-          {% for key in user.keys() %}
-          {% if key != 'Id' %}
-          <td class="info-single-item">
-            {% if key == 'Name' and search_name %}
-            <a class="id-link" href="/user_detail/{{user['Id']}}">{{user[key]}}</a>
-
-
-
-            {% for i in range(user['Name']|length - search_name|length + 1) %}
-            {% if user['Name'][i:i+search_name|length] == search_name %}
-            <span class="highlighted">
-
-              {% endif %}
-
-              {{user['Name'][i:i+search_name|length]}}
-              
-              {% if user['Name'][i:i+search_name|length] == search_name %}
-              {% set i = i + search_name|length %}
-            </span>
-            {% endif %}
-            {% endfor %}
-
-
-
-
-            {% else %}
-            {{user[key]}}
-            {% endif %}
-          </td>
-          {% endif %}
-          {% endfor %}
-        </tr>
-
-        {% endfor %}
-
-
-
         {% for i in range(users|length) %}
         <tr class="info-row">
           {% for key in users[i].keys() %}
@@ -117,16 +82,18 @@
             <a class="id-link" href="/user_detail/{{users[i]['Id']}}">{{users[i][key]}}</a>
             {% for c in range(users[i]['Name']|length) %}
             {% if highlighted[i][c] == 1 %}
-              <span class="highlighted">{{users[i]['Name'][c]}}</span>
+              <p class="highlighted">{{users[i]['Name'][c]}}</p>
               {% else %}
-            {{users[i]['Name'][c]}}
+              <p>{{users[i]['Name'][c]}}</p>
             {% endif %}
             {% endfor %}
+            {% else %}
+            {{users[i][key]}}
             {% endif %}
+          </td>
           {% endif %}
           {% endfor %}
         </tr>
-
         {% endfor %}
       </tbody>
 
