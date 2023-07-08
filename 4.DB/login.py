@@ -68,5 +68,5 @@ elif (mode == "login") :
     print("로그인을 진행합니다")
     login()
 else :
-    print("잘못된 t모드입니다. 다시 시작해주세요")
+    print("잘못된 모드입니다. 다시 시작해주세요")
 conn.close()
