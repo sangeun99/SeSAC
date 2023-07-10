@@ -66,6 +66,11 @@ WHERE SUBSTR(invoices.InvoiceDate, 0, 5)
 BETWEEN "2009" AND "2011"
 GROUP BY SUBSTR(invoices.InvoiceDate, 0, 5);
 
+SELECT COUNT(i.InvoiceId) AS NumberOfInvoices, strftime('%Y', i.InvoiceDate) AS InvoiceYear
+FROM invoices I
+WHERE InvoiceYear IN ('2009', '2011')
+GROUP BY InvoiceYear;
+
 -- 10. invoice_37_line_item_count.sql: Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for Invoice ID 37.
 -- 10. invoice_37_line_item_count.sql: InvoiceLine 테이블을 보고 Invoice ID 37에 대한 라인 항목 수를 계산하는 쿼리를 제공합니다.
 
@@ -152,7 +157,7 @@ GROUP BY EmployeeId);
 -- 21. sales_agent_customer_count.sql: Provide a query that shows the count of customers assigned to each sales agent.
 -- 21. sales_agent_customer_count.sql: 각 판매 대리점에 할당된 고객 수를 보여주는 쿼리를 제공한다.
 
-SELECT E.FirstName||" "||E.LastName AS EmployeeName, COUNT(*)
+SELECT E.FirstName||" "||E.LastName AS EmployeeName, COUNT(*) AS NumberOfCustomers
 FROM customers C
 JOIN employees E ON E.EmployeeId = C.SupportRepId
 GROUP BY E.EmployeeId;
@@ -160,11 +165,24 @@ GROUP BY E.EmployeeId;
 -- 22. sales_per_country.sql: Provide a query that shows the total sales per country.
 -- 22. sales_per_country.sql: 국가별 총 매출을 보여주는 쿼리를 제공한다.
 
-
+SELECT SUM(IT.UnitPrice * IT.Quantity) AS TotalSales, I.BillingCountry AS Country
+FROM invoices I
+JOIN invoice_items IT ON I.InvoiceId = IT.InvoiceId
+GROUP BY I.BillingCountry;
 
 -- 23. top_country.sql: Which country's customers spent the most?
 -- 23. top_country.sql: 고객이 가장 많이 지출한 국가는 어디입니까?
 
+SELECT MAX(TotalSales), Country
+FROM (SELECT SUM(IT.UnitPrice * IT.Quantity) AS TotalSales, I.BillingCountry AS Country
+FROM invoices I
+JOIN invoice_items IT ON I.InvoiceId = IT.InvoiceId
+GROUP BY I.BillingCountry);
+
+SELECT MAX(TotalSales), Country
+FROM (SELECT BillingCountry As Country, sum(I.total) AS TotalSales
+FROM invoices I
+group by BillingCountry);
 
 -- 24. top_2013_track.sql: Provide a query that shows the most purchased track of 2013.
 -- 24. top_2013_track.sql: 2013년 가장 많이 구매한 트랙을 보여주는 쿼리를 제공합니다.
