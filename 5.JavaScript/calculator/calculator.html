@@ -39,7 +39,7 @@
 
     Array.from(numberButton).forEach((element) => {
       element.addEventListener("click", function() {
-      document.getElementById("status").value = this.value;
+      document.getElementById("status").value += this.value;
     })
     });
 
