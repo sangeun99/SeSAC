@@ -1,9 +1,13 @@
-.row {
-  display: flex;
-
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  row-gap: 10px;
+  column-gap: 10px;
+  width: 250px;
+  height: 200px;
 }
 
-.component {
-  width: 30px;
-  height: 30px;
+.component:nth-child(1) {
+  grid-column: 1 / span 4;
 }
