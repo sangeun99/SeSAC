@@ -10,15 +10,15 @@
 
 <body>
   <div class="container">
-    <input type="number" id="status" class="component"/>
-    <button class="component">+</button>
-    <button class="component">-</button>
-    <button class="component">*</button>
-    <button class="component">/</button>
+    <input class="component" type="text" id="status" disabled/>
+    <button class="component number" value="-">-</button>
+    <button class="component number" value="+">+</button>
+    <button class="component number" value="*">*</button>
+    <button class="component number" value="/">/</button>
     <button class="component number" value="7">7</button>
     <button class="component number" value="8">8</button>
     <button class="component number" value="9">9</button>
-    <button class="component">=</button>
+    <button class="component" id="equal">=</button>
     <button class="component number" value="4">4</button>
     <button class="component number" value="5">5</button>
     <button class="component number" value="6">6</button>
@@ -39,7 +39,11 @@
 
     document.getElementById("reset").addEventListener("click", function () {
       document.getElementById("status").value = "";
-    })
+    });
+
+    document.getElementById("equal").addEventListener("click", function() {
+      document.getElementById("status").value = eval(document.getElementById("status").value);
+    });
   </script>
 </body>
 
