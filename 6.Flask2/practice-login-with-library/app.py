@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import sqlalchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 """
 LoginManager: 로그인 관리를 담당하는 클래스로, Flask 애플리케이션에서 로그인 기능을 초기화하고 관리하는 역할을 합니다.
@@ -26,8 +27,14 @@ login_manager.login_view = 'login'
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(80), nullable=False)
+    password_hash = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(80))
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
         return f'<User {self.id}, {self.username}, {self.password}>'
@@ -47,10 +54,10 @@ def login() :
     # 3. 성공했다면 로그인 정보를 저장하고 로그인한 페이지로 이동한다
     #    실패했다면 오류를 알려준다
     if (request.method == 'POST'):
-        form_username = request.form['username']
-        form_password = request.form['password']
-        result = User.query.filter((User.username==form_username), (User.password==form_password)).first()
-        if result:
+        username = request.form['username']
+        password = request.form['password']
+        result = User.query.filter(User.username==username).first()
+        if result and result.check_password(password):
             login_user(result)
         else :
             flash('login failed')
@@ -70,8 +77,8 @@ def profile_edit():
     # 2. 저장할 장소(즉, 현재 사용자)를 가져온다. (current_user를 통해 접근 가능)
     # 3. 받아온 정보를 db에 저장한다.
     if request.method == 'POST' :
-        form_password = request.form['password']
-        current_user.password = form_password
+        password = request.form['password']
+        current_user.set_password(password)
         db.session.commit()
         flash('비밀번호가 변경되었습니다.')
         return render_template('main.html')
@@ -85,12 +92,13 @@ def register():
     # 3. DB에 저장한다
     logout_user()
     if request.method == 'POST':
-        form_username = request.form['username']
-        form_password = request.form['password']
-        form_email = request.form['email']
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
 
         try :
-            new_user = User(username=form_username, password=form_password, email=form_email)
+            new_user = User(username=username, email=email)
+            new_user.set_password(password)
             db.session.add(new_user)
             db.session.commit()
             flash("회원가입이 완료되었습니다")
