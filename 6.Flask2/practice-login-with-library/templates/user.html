@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/login">로그인</a>
+    <a class="navbar-brand" href="/logout">로그아웃</a>
+    <a class="navbar-brand" href="/register">회원가입하기</a>
+    <a class="navbar-brand" href="/users">유저 조회하기</a>
+  </nav>
+  <h2>유저 조회</h2>
+  {% for user in users %}
+    <p>id : {{ user.id }} username : {{ user.username }}, password : {{ user.password }}, email : {{ user.email }}</p>
+    <!-- <p>id : {{ user.id }} username : {{ user.username }}, password : {{ user.password }}</p> -->
+  {% endfor %}
+</body>
+</html>
