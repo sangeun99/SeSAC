@@ -3,3 +3,5 @@ launch.json
 __pycache__
 .vscode
 *.csv
+
+.sqlite3
