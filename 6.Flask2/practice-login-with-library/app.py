@@ -60,8 +60,8 @@ def login() :
         if result and result.check_password(password):
             login_user(result)
         else :
-            flash('login failed')
-    return render_template('main.html', current_user=current_user)
+            flash('로그인에 실패하였습니다.')
+    return redirect(url_for('main'))
 
 @app.route('/logout')
 @login_required
@@ -81,7 +81,7 @@ def profile_edit():
         current_user.set_password(password)
         db.session.commit()
         flash('비밀번호가 변경되었습니다.')
-        return render_template('main.html')
+        return redirect(url_for('main'))
     return render_template('profile_edit.html', current_user=current_user)
 
 # 신규 사용자 생성
@@ -104,7 +104,7 @@ def register():
             flash("회원가입이 완료되었습니다")
         except sqlalchemy.exc.IntegrityError :
             flash("아이디가 중복되었습니다. 다시 가입해주세요")
-            return redirect(url_for('register'))
+            return render_template('register.html')
         return redirect(url_for('main'))
     return render_template('register.html')
 
@@ -117,6 +117,7 @@ def delete():
     return redirect(url_for('main'))
 
 @app.route('/users/')
+@login_required
 def users():
     # 사용자 정보를 모두 조회한다
     users = User.query.all()
