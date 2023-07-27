@@ -2,9 +2,25 @@
 
 {% block content %}
 <h2>유저 조회</h2>
-{% for user in users %}
-<p>id : {{ user.id }} username : {{ user.username }}, password : {{ user.password_hash }}, email : {{ user.email }}</p>
-<!-- <p>id : {{ user.id }} username : {{ user.username }}, password : {{ user.password }}</p> -->
-{% endfor %}
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">USERNAME</th>
+        <th scope="col">EMAIL</th>
+        <th scope="col">PASSWORD</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.password_hash }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
