@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{current_user.username}}님 비밀번호 수정</h1>
+<h2>{{current_user.username}}님 비밀번호 수정</h2>
 <form action="{{ url_for('profile_edit') }}" method="POST">
   <div class="mb-3">
     <label for="password" class="form-label">새로운 비밀번호</label>
