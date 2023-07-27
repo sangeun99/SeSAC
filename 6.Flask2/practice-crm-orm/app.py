@@ -100,7 +100,7 @@ def main():
     user = User.query.filter_by(Name="윤수빈").first()
     order_by_user = user.OrderR
     for order in order_by_user :
-        store = order.storesss
+        store = order.stores
         print(f"윤수빈이 방문한 상점은 {store.Name}, 시간은 {order.OrderAt}")
     
     return 'hello'
