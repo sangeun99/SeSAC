@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상품 목록</title>
+</head>
+
+<body>
+  <h1>카드 보기</h1>
+  <table border=1>
+    <tr>
+      <th>item</th>
+      <th>count</th>
+      <th>price</th>
+    </tr>
+    {% for item_name, item_info in cart.items() %}
+    {% if item_info.quantity %}
+    <tr>
+      <td>{{ item_info.name }}</td>
+      <td>{{ item_info.quantity }}</td>
+      <td>{{ item_info.price }}</td>
+      <td>
+        <a href="/add_to_cart?itemname={{ item_name }}">+</a>
+      </td>
+      <td>
+        <a href="/delete_from_cart?itemname={{ item_name }}">x</a>
+      </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+  </table>
+  <h2>최종 가격 : {{ total_price }}</h2>
+
+</body>
+
+</html>
