@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-import sqlalchemy
+from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
+import sqlalchemy
 
 """
 LoginManager: 로그인 관리를 담당하는 클래스로, Flask 애플리케이션에서 로그인 기능을 초기화하고 관리하는 역할을 합니다.
@@ -20,6 +21,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+migrate = Migrate(app, db)
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -27,14 +30,17 @@ login_manager.login_view = 'login'
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    password_hash = db.Column(db.String(120), nullable=False)
+    password = db.Column(db.String(120), nullable=False)
+    # password_hash = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(80))
 
     def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+        # self.password_hash = generate_password_hash(password)
+        self.password = password
 
     def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+        # return check_password_hash(self.password_hash, password)
+        return self.password == password
 
     def __repr__(self):
         return f'<User {self.id}, {self.username}, {self.password}>'
