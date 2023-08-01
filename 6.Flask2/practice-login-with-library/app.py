@@ -31,19 +31,19 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
-    # password_hash = db.Column(db.String(120), nullable=False)
+    password_hash = db.Column(db.String(120))
     email = db.Column(db.String(80))
 
     def set_password(self, password):
-        # self.password_hash = generate_password_hash(password)
-        self.password = password
+        self.password_hash = generate_password_hash(password)
+        # self.password = password
 
     def check_password(self, password):
-        # return check_password_hash(self.password_hash, password)
-        return self.password == password
+        return check_password_hash(self.password_hash, password)
+        # return self.password == password
 
     def __repr__(self):
-        return f'<User {self.id}, {self.username}, {self.password}>'
+        return f'<User {self.id}, {self.username}, {self.email}, {self.password}>'
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -104,6 +104,7 @@ def register():
 
         try :
             new_user = User(username=username, email=email)
+            # new_user = User(username=username)
             new_user.set_password(password)
             db.session.add(new_user)
             db.session.commit()
