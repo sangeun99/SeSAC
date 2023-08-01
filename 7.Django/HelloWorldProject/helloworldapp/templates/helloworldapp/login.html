@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+</head>
+<body>
+  <form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    <label for="username">이름 : </label>
+    <input name="username" type="text" required>
+    <label for="password">비밀번호 : </label>
+    <input name="password" type="password" required>
+    <button type="submit">로그인</button>
+  </form>
+</body>
+</html>
