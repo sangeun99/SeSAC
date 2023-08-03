@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task {{ tid }}</title>
+</head>
+<body>
+  <p>id: {{ tid }}</p>
+  <p>title: {{ task.title }}</p>
+  <p>completed: {{ task.completed }}</p>
+  <form action="/todo/{{ tid }}/delete" method="POST">
+    {% csrf_token %}
+    <button type="submit">
+      delete
+    </button>
+  </form>
+  <a href="/todo/{{ tid }}/update">update</a>
+</body>
+</html>
