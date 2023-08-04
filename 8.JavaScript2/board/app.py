@@ -29,7 +29,7 @@ def delete():
 
 @app.route('/update', methods=['post'])
 def update():
-    id = int(request.form['id'])
+    id = request.form['id']
     title = request.form['title']
     message = request.form['message']
 
