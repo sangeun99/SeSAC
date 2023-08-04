@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메모장 1.0</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <style>
+    * {
+      margin: 0;
+      font-family: var(--font-main);
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: var(--font-main);
+      font-size: var(--font-size-14);
+    }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--primary);
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .wrap {
+      width: 100%
+    }
+
+    .card-columns {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-around;
+      gap: 20px;
+    }
+
+    .card-body {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <div class="container">
+    <div class="wrap">
+      <div class="input-container">
+        <div class="form-group">
+          <h1>메모장</h1>
+        </div>
+        <div class="input-group">
+          <input type="text" class="form-control" id="input-title" name="title" placeholder="제목을 입력하세요">
+        </div>
+        <div class="input-group">
+          <textarea name="message" id="input-text" rows="2" class="form-control" placeholder="내용을 입력하세요"></textarea>
+        </div>
+        <div class="form-group">
+          <button type="submit" id="submit-btn" class="btn btn-outline-primary" onclick="uploadPost()">저장하기</button>
+        </div>
+      </div>
+
+      <div id="card-list" class="card-columns">
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"></script>
+
+    <script>
+      function uploadPost() {
+        let title = $("#input-title").val();
+        let message = $("#input-text").val();
+
+        $.ajax({
+          type: "post",
+          url: "/create",
+          data: { title: title, message: message },
+          success: function(resp) {
+            console.log(resp);
+            alert('저장완료' + resp);
+            window.location = "/";
+          }
+        })
+      }
+
+      function getvalue(id, title, message) { // 수정 버튼을 누르면 값이 채워지도록 만드는 함수
+        $('#input-title').val(title);
+        $('#input-text').val(message);
+        
+        $('#submit-btn').text('수정완료');
+        $('#submit-btn').removeAttr("onclick");
+        $('#submit-btn').attr("onclick", "updatePost(" + id + ")");
+      }
+
+      function updatePost(mid) { // 수정완료 버튼을 누르면 값이 변하도록 db 보내는 함수
+        let title = $('#input-title').val();
+        let message = $('#input-text').val();
+
+
+        console.log(mid, title, message)
+
+        $.ajax({
+          type: "post",
+          url: "/update",
+          data: { id: mid, title: title, message: message },
+          success: function(resp) {
+            alert('수정완료' + resp);
+            window.location = '/';
+          }
+        })
+      }
+
+      function deletePost(id) {
+        $.ajax({
+          type: "post",
+          url: "/delete",
+          data: { id: id },
+          success: function(resp) {
+            alert('삭제완료' + resp);
+            window.location = '/';
+          }
+        })
+      }
+
+      function makeCard(id, title, message) {
+        data = [id, title, message];
+        let card_content = 
+          `<div class="card-body">
+            <a class="card-title" id="input-title">${title}</a>
+            <p class="card-text" id="input-text">${message}</p>
+            <button type="button" class="btn btn-info" onclick="getvalue(${id}, '${title}', '${message}')">수정</button>
+            <button type="button" class="btn btn-warning" onclick="deletePost(${id})">삭제</button>
+          </div>
+          `
+        $("#card-list").append(card_content);
+      }
+
+      $('document').ready(function() {
+        console.log('document is ready')
+        $.ajax({
+          type: "get",
+          url: "/list",
+          data: {},
+          success: function(resp) {
+            console.log(resp)
+            for (let i = 0; i < resp.length; i++) {
+              makeCard(resp[i]['id'], resp[i]['title'], resp[i]['message']);
+            }
+          }
+        })
+      })
+
+    </script>
+
+</body>
+
+</html>
