@@ -14,7 +14,7 @@ function uploadPost() {
   })
 }
 
-function getvalue(id, title, message) {
+function getValue(id, title, message) {
   // 수정 버튼을 누르면 값이 채워지도록 만드는 함수
   $('#input-type-desc').text('메모 수정하기');
   $('#input-title').val(title);
@@ -57,16 +57,22 @@ function makeCard(id, title, message) {
     `
     <div class="card-container">
       <div class="card-content-warp">
-        <h3 class="card-title">${title}</a>
+        <h3 class="card-title">${title}</h3>
         <p class="card-message">${message}</p>
+        <i class="fa-regular fa-copy" onclick="copyToClipboard('${message}')"></i>
       </div>
       <div class="card-btn-warp">
-        <div class="card-btn" onclick="getvalue(${id}, '${title}', '${message}')">수정</div>
+        <div class="card-btn" onclick="getValue(${id}, '${title}', '${message}')">수정</div>
         <div class="card-btn" onclick="deletePost(${id})">삭제</div>
       </div>
     </div>
     `
   $("#card-list").append(card_content);
+}
+
+function copyToClipboard(message) {
+  navigator.clipboard.writeText(message);
+  alert("텍스트 복사 완료!")
 }
 
 $('document').ready(function () {

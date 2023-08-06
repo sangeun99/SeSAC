@@ -781,6 +781,14 @@ h2 {
   color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
+.fa-copy {
+  float: right;
+}
+
+.fa-copy:hover {
+  cursor: pointer;
+}
+
 .card-btn {
   border-bottom-left-radius: 0.375rem;
   padding-top: 0.5rem;

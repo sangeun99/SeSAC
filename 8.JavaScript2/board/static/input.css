@@ -54,6 +54,10 @@
     @apply text-sm font-normal text-gray-600;
   }
 
+  .fa-copy {
+    @apply float-right hover:cursor-pointer;
+  }
+
   .card-btn {
     @apply rounded-bl-md py-2 font-medium hover:bg-gray-200 hover:cursor-pointer;
   }
