@@ -12,7 +12,6 @@ def main():
 def create():
     title = request.form['title']
     message = request.form['message']
-
     sql = "INSERT INTO board(title, message) VALUES (?, ?)"
     db.execute(sql, (title, message))
     db.commit()
@@ -21,7 +20,6 @@ def create():
 @app.route('/delete', methods=['post'])
 def delete():
     id = request.form['id']
-    print(id)
     sql = "DELETE FROM board WHERE id=?"
     db.execute(sql, (id, ))
     db.commit()
@@ -32,7 +30,6 @@ def update():
     id = request.form['id']
     title = request.form['title']
     message = request.form['message']
-
     sql = "UPDATE board SET title=?, message=? WHERE id=?"
     db.execute(sql, (title, message, id))
     db.commit()
@@ -42,9 +39,6 @@ def update():
 def list():
     sql = "SELECT * FROM board"
     result = db.execute_fetch(sql)
-
-    # list to dict
-    # example : {2 : {'title': title, 'message" : message}}
     tuple_keys = ('id', 'title', 'message')
     dict_list = []
     for r in result:
