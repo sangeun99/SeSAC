@@ -35,10 +35,11 @@
 <body>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <div class="container">
-    <div class="wrap">
-      <div class="input-container">
+    <h1>메모장 1.0</h1>
+    <div class="wrap d-flex row justify-content-center">
+      <div class="input-container col-5 card">
         <div class="form-group">
-          <h1>메모장</h1>
+          <h2 id="input-type-desc">새 메모 등록하기</h2>
         </div>
         <div class="input-group">
           <input type="text" class="form-control" id="input-title" name="title" placeholder="제목을 입력하세요">
@@ -77,6 +78,7 @@
 
       function getvalue(id, title, message) {
         // 수정 버튼을 누르면 값이 채워지도록 만드는 함수
+        $('#input-type-desc').text('메모 수정하기');
         $('#input-title').val(title);
         $('#input-text').val(message);
 
