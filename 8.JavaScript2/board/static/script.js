@@ -55,14 +55,14 @@ function deletePost(id) {
 function makeCard(id, title, message) {
   let card_content =
     `
-    <div class="text-center border border-solid shadow-md rounded-md grid grid-cols-1 divide-y">
-      <div class="px-2 py-5">
-        <h3 class="text-lg font-semibold text-gray-900 group-hover:text-gray-600" id="input-title">${title}</a>
-        <p class="text-sm font-normal text-gray-600" id="input-text">${message}</p>
+    <div class="card-container">
+      <div class="card-content-warp">
+        <h3 class="card-title">${title}</a>
+        <p class="card-message">${message}</p>
       </div>
-      <div class="grid grid-cols-2 divide-x">
-        <div class="rounded-bl-md py-2 font-medium hover:bg-gray-200 hover:cursor-pointer" onclick="getvalue(${id}, '${title}', '${message}')">수정</div>
-        <div class="rounded-br-md py-2 font-medium hover:bg-gray-200 hover:cursor-pointer" onclick="deletePost(${id})">삭제</div>
+      <div class="card-btn-warp">
+        <div class="card-btn" onclick="getvalue(${id}, '${title}', '${message}')">수정</div>
+        <div class="card-btn" onclick="deletePost(${id})">삭제</div>
       </div>
     </div>
     `
