@@ -5,54 +5,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>메모장 1.0</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  <style>
-    * {
-      margin: 0;
-      font-family: var(--font-main);
-      -moz-osx-font-smoothing: grayscale;
-      -webkit-font-smoothing: antialiased;
-      box-sizing: border-box;
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            clifford: '#da373d',
+          }
+        }
+      }
     }
-
-    html {
-      font-family: var(--font-main);
-      font-size: var(--font-size-14);
-    }
-
-    body {
-      font-family: var(--font-main);
-      color: var(--primary);
-    }
-
-    h1 {
-      margin: 0;
-    }
-  </style>
+  </script>
 </head>
 
 <body>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <div class="container">
-    <h1>메모장 1.0</h1>
-    <div class="wrap d-flex row justify-content-center">
-      <div class="input-container col-5 card">
-        <div class="form-group">
-          <h2 id="input-type-desc">새 메모 등록하기</h2>
-        </div>
-        <div class="input-group">
-          <input type="text" class="form-control" id="input-title" name="title" placeholder="제목을 입력하세요">
-        </div>
-        <div class="input-group">
-          <textarea name="message" id="input-text" rows="2" class="form-control" placeholder="내용을 입력하세요"></textarea>
-        </div>
-        <div class="form-group">
-          <button type="submit" id="submit-btn" class="btn btn-outline-primary" onclick="uploadPost()">저장하기</button>
+  <div class="container mx-auto px-8">
+    <div class="wrap">
+      <div class="flex justify-center my-5">
+        <div class="input-container basis-full md:basis-1/2 lg:basis-1/3 card flex flex-col gap-3 justify-center border border-solid shadow-md rounded-md px-5 py-5">
+          <div class="place-self-center">
+            <h2 id="input-type-desc" class="text-xl font-bold underline">새 메모 등록하기</h2>
+          </div>
+          <div class="place-self-auto">
+            <label for="title" class="block text-sm font-bold leading-6 text-gray-900">Title</label>
+            <input type="text" id="input-title" name="title" placeholder="제목을 입력하세요" class="block w-full rounded-md border-0 py-1.5 bg-transparent text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+          </div>
+          <div class="place-self-auto">
+            <label for="message" class="block text-sm font-bold leading-6 text-gray-900">Content</label>
+            <textarea name="message" id="input-text" placeholder="내용을 입력하세요" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+          </div>
+          <div class="place-self-end">
+            <button type="submit" id="submit-btn" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onclick="uploadPost()">저장하기</button>
+          </div>
         </div>
       </div>
 
-      <div id="card-list" class="card-columns d-flex row justify-content-center">
+      <div id="card-list" class="card-columns m-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 mb-5">
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
@@ -117,12 +107,14 @@
       function makeCard(id, title, message) {
         let card_content =
           `
-          <div class="d-flex col-4 justify-content-around card text-center">
-            <div class="card-body">
-              <a class="card-title" id="input-title">${title}</a>
-              <p class="card-text" id="input-text">${message}</p>
-              <button type="button" class="btn btn-primary" onclick="getvalue(${id}, '${title}', '${message}')">수정</button>
-              <button type="button" class="btn btn-primary" onclick="deletePost(${id})">삭제</button>
+          <div class="text-center border border-solid shadow-md rounded-md grid grid-cols-1 divide-y">
+            <div class="px-2 py-5">
+              <h3 class="text-lg font-semibold text-gray-900 group-hover:text-gray-600" id="input-title">${title}</a>
+              <p class="text-sm font-normal text-gray-600" id="input-text">${message}</p>
+            </div>
+            <div class="grid grid-cols-2 divide-x">
+              <div class="rounded-bl-md py-2 font-medium hover:bg-gray-200 hover:cursor-pointer" onclick="getvalue(${id}, '${title}', '${message}')">수정</div>
+              <div class="rounded-br-md py-2 font-medium hover:bg-gray-200 hover:cursor-pointer" onclick="deletePost(${id})">삭제</div>
             </div>
           </div>
           `
