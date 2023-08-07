@@ -13,8 +13,8 @@ def main():
 def create():
     title = request.form['title']
     message = request.form['message']
-    created_at = datetime.datetime.now()
-    modified_at = datetime.datetime.now()
+    created_at = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    modified_at = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     sql = "INSERT INTO board(title, message, created_at, modified_at) VALUES (?, ?, ?, ?)"
     db.execute(sql, (title, message, created_at, modified_at))
     db.commit()
@@ -33,7 +33,7 @@ def update():
     id = request.form['id']
     title = request.form['title']
     message = request.form['message']
-    modified_at = datetime.datetime.now()
+    modified_at = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     sql = "UPDATE board SET title=?, message=?, modified_at=? WHERE id=?"
     db.execute(sql, (title, message, modified_at, id))
     db.commit()
