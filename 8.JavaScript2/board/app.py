@@ -15,8 +15,9 @@ def create():
     message = request.form['message']
     created_at = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     modified_at = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    sql = "INSERT INTO board(title, message, created_at, modified_at) VALUES (?, ?, ?, ?)"
-    db.execute(sql, (title, message, created_at, modified_at))
+    pin = False
+    sql = "INSERT INTO board(title, message, created_at, modified_at, pin) VALUES (?, ?, ?, ?, ?)"
+    db.execute(sql, (title, message, created_at, modified_at, pin))
     db.commit()
     return "ok"
 
@@ -39,11 +40,25 @@ def update():
     db.commit()
     return "ok"
 
+@app.route('/pin', methods=['post'])
+def pin():
+    id = request.form['id']
+    sql = "SELECT pin FROM board WHERE id=?"
+    pin = db.execute_fetch_one(sql, (id, ))[0]
+
+    sql = "UPDATE board SET pin=?, pinned_at=? WHERE id=?"
+    if pin :
+        db.execute(sql, (False, None, id))
+    else:
+        db.execute(sql, (True, datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), id))
+    db.commit()
+    return "ok"
+
 @app.route('/list', methods=['get'])
 def list():
-    sql = "SELECT * FROM board ORDER BY modified_at DESC"
+    sql = "SELECT * FROM board ORDER BY pin DESC, pinned_at DESC, modified_at DESC"
     result = db.execute_fetch(sql)
-    tuple_keys = ('id', 'title', 'message', 'created_at', 'modified_at')
+    tuple_keys = ('id', 'title', 'message', 'created_at', 'modified_at', 'pin')
     dict_list = []
     for r in result:
         dict_value = dict(zip(tuple_keys, r))

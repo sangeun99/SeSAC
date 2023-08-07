@@ -52,15 +52,29 @@ function deletePost(id) {
   })
 }
 
-function makeCard(id, title, message, modified_at) {
+function pinCard(id){
+  $.ajax({
+    type: "post",
+    url: "/pin",
+    data: { id: id },
+    success: function (resp) {
+      window.location = '/';
+    }
+  })
+}
+
+function makeCard(id, title, message, modified_at, pin) {
+  message = message.split("\n").join("");
+
   let card_content =
     `
-    <div class="card-container">
+    <div class="card-container" id="${id}">
       <div class="card-content-warp">
-        <i class="fa-regular fa-copy" onclick="copyToClipboard('${message}')"></i>
+        <i class="pin-icon fa-solid fa-thumbtack pin-${pin}" onclick="pinCard(${id})"></i>
+        <i class="copy-icon fa-regular fa-copy" onclick="copyToClipboard(${id}, '${message}')"></i>
         <h3 class="card-title">${title}</h3>
         <div class="card-message">
-        <p>${message}</p>
+          <p>${message}</p>
         </div>
         <p class="card-time">${modified_at}</p>
       </div>
@@ -73,9 +87,15 @@ function makeCard(id, title, message, modified_at) {
   $("#card-list").append(card_content);
 }
 
-function copyToClipboard(message) {
+function copyToClipboard(id, message) {
   navigator.clipboard.writeText(message);
-  alert("텍스트 복사 완료!")
+  card = document.getElementById(id);
+  icon = card.querySelector('.copy-icon');
+  $(icon).removeClass("fa-regular fa-copy").addClass("fa-solid fa-check-double");
+  setTimeout(()=> {
+    $(icon).removeClass("fa-solid fa-check-double").addClass("fa-regular fa-copy");
+  }
+ ,2000);
 }
 
 $('document').ready(function () {
@@ -87,7 +107,7 @@ $('document').ready(function () {
     success: function (resp) {
       console.log(resp)
       for (let i = 0; i < resp.length; i++) {
-        makeCard(resp[i]['id'], resp[i]['title'], resp[i]['message'], resp[i]['modified_at']);
+        makeCard(resp[i]['id'], resp[i]['title'], resp[i]['message'], resp[i]['modified_at'], resp[i]['pin']);
       }
     }
   })
