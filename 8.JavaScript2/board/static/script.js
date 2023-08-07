@@ -52,18 +52,21 @@ function deletePost(id) {
   })
 }
 
-function makeCard(id, title, message) {
+function makeCard(id, title, message, modified_at) {
   let card_content =
     `
     <div class="card-container">
       <div class="card-content-warp">
-        <h3 class="card-title">${title}</h3>
-        <p class="card-message">${message}</p>
         <i class="fa-regular fa-copy" onclick="copyToClipboard('${message}')"></i>
+        <h3 class="card-title">${title}</h3>
+        <div class="card-message">
+        <p>${message}</p>
+        </div>
+        <p class="card-time">${modified_at}</p>
       </div>
       <div class="card-btn-warp">
-        <div class="card-btn" onclick="getValue(${id}, '${title}', '${message}')">수정</div>
-        <div class="card-btn" onclick="deletePost(${id})">삭제</div>
+        <div class="card-btn left" onclick="getValue(${id}, '${title}', '${message}')">수정</div>
+        <div class="card-btn right" onclick="deletePost(${id})">삭제</div>
       </div>
     </div>
     `
@@ -84,7 +87,7 @@ $('document').ready(function () {
     success: function (resp) {
       console.log(resp)
       for (let i = 0; i < resp.length; i++) {
-        makeCard(resp[i]['id'], resp[i]['title'], resp[i]['message']);
+        makeCard(resp[i]['id'], resp[i]['title'], resp[i]['message'], resp[i]['modified_at']);
       }
     }
   })

@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, jsonify, redirect
+import datetime
+from flask import Flask, render_template, request, jsonify
 from database import Database
 
 app = Flask(__name__)
@@ -12,8 +13,10 @@ def main():
 def create():
     title = request.form['title']
     message = request.form['message']
-    sql = "INSERT INTO board(title, message) VALUES (?, ?)"
-    db.execute(sql, (title, message))
+    created_at = datetime.datetime.now()
+    modified_at = datetime.datetime.now()
+    sql = "INSERT INTO board(title, message, created_at, modified_at) VALUES (?, ?, ?, ?)"
+    db.execute(sql, (title, message, created_at, modified_at))
     db.commit()
     return "ok"
 
@@ -30,16 +33,17 @@ def update():
     id = request.form['id']
     title = request.form['title']
     message = request.form['message']
-    sql = "UPDATE board SET title=?, message=? WHERE id=?"
-    db.execute(sql, (title, message, id))
+    modified_at = datetime.datetime.now()
+    sql = "UPDATE board SET title=?, message=?, modified_at=? WHERE id=?"
+    db.execute(sql, (title, message, modified_at, id))
     db.commit()
     return "ok"
 
 @app.route('/list', methods=['get'])
 def list():
-    sql = "SELECT * FROM board"
+    sql = "SELECT * FROM board ORDER BY modified_at DESC"
     result = db.execute_fetch(sql)
-    tuple_keys = ('id', 'title', 'message')
+    tuple_keys = ('id', 'title', 'message', 'created_at', 'modified_at')
     dict_list = []
     for r in result:
         dict_value = dict(zip(tuple_keys, r))
