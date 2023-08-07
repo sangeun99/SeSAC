@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>List</title>
+</head>
+
+<body>
+  <h2>movies</h2>
+  <table border="1">
+    {% for movie in movies %}
+    <tr>
+      <td>{{ movie.title }}</td>
+      <td>{{ movie.grade }}</td>
+      <td>{{ movie.rate }}%</td>
+      <td>{{ movie.link }}</td>
+      <td>{{ movie.img_url }}</td>
+      <td>{{ movie.short_desc }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</body>
+
+</html>
