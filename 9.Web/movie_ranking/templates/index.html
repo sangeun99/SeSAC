@@ -5,18 +5,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>List</title>
+  <style>
+    img {
+      height: 100px;
+    }
+  </style>
 </head>
 
 <body>
-  <h2>movies</h2>
+  <h2>Daily Ranking : {{date}}</h2>
   <table border="1">
+    <tr>
+      <th>랭킹</th>
+      <th>포스터</th>
+      <th>제목</th>
+      <th>평점</th>
+      <th>예매율</th>
+      <th>소개</th>
+    </tr>
     {% for movie in movies %}
     <tr>
-      <td>{{ movie.title }}</td>
+      <td>{{ movie.ranking }}</td>
+      <td>
+        <img src="{{ movie.img_url }}" alt="">
+      </td>
+      <td>
+        <a href="https://movie.daum.net{{ movie.link }}">{{ movie.title }}</a>
+      </td>
       <td>{{ movie.grade }}</td>
       <td>{{ movie.rate }}%</td>
-      <td>{{ movie.link }}</td>
-      <td>{{ movie.img_url }}</td>
       <td>{{ movie.short_desc }}</td>
     </tr>
     {% endfor %}
