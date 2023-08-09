@@ -64,8 +64,6 @@ function pinCard(id){
 }
 
 function makeCard(id, title, message, modified_at, pin) {
-  message = message.split("\n").join("");
-
   let card_content =
     `
     <div class="card-container" id="${id}">
@@ -87,17 +85,6 @@ function makeCard(id, title, message, modified_at, pin) {
   $("#card-list").append(card_content);
 }
 
-function copyToClipboard(id, message) {
-  navigator.clipboard.writeText(message);
-  card = document.getElementById(id);
-  icon = card.querySelector('.copy-icon');
-  $(icon).removeClass("fa-regular fa-copy").addClass("fa-solid fa-check-double");
-  setTimeout(()=> {
-    $(icon).removeClass("fa-solid fa-check-double").addClass("fa-regular fa-copy");
-  }
- ,2000);
-}
-
 $('document').ready(function () {
   console.log('document is ready')
   $.ajax({
@@ -109,6 +96,19 @@ $('document').ready(function () {
       for (let i = 0; i < resp.length; i++) {
         makeCard(resp[i]['id'], resp[i]['title'], resp[i]['message'], resp[i]['modified_at'], resp[i]['pin']);
       }
+
+      // message copy
+      $('.copy-icon').click(function(e) {
+        message = $(e.target).siblings('.card-message').children().first().text();
+        navigator.clipboard.writeText(message);
+
+        $(e.target).removeClass("fa-regular fa-copy").addClass("fa-solid fa-check-double");
+        // toggle class // class="on"
+        setTimeout(()=> {
+          $(e.target).removeClass("fa-solid fa-check-double").addClass("fa-regular fa-copy");
+        }
+        ,2000); // css로 alert 띄우기...? ::before
+      });
     }
   })
 })
