@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>daily ranking</title>
 </head>
+
 <body>
-  {% for date in dates %}
-    <a href="list/?date={{date[0]}}">{{ date[0] }}</a>
-  {% endfor %}
+  <h2>Daily Ranking</h2>
+  <ul>
+    {% for date in dates %}
+    <li>
+      <a href="list/?date={{date[0]}}">{{ date[0] }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+
 </body>
+
 </html>
